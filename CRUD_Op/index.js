@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 8080
 app.use(morgan('tiny'));
 
 
+
 // parse request to body-parser
 app.use(bodyparser.urlencoded({
      extended: true
@@ -31,6 +32,10 @@ app.use('/js', express.static(path.resolve(__dirname, "assets/js")))
 
 app.get('/', (req, res) => {
      res.render('crud');
+});
+
+app.get('/form',(req,res)=>{
+     res.render('_form.ejs');
 });
 
 
