@@ -7,13 +7,23 @@ var urlencodedParser = bodyParser.urlencoded({
 });
 module.exports = function (app) {
 
+app.get('/', (req, res) => {
+     res.render('crud');
+});
 
+app.get('/form', (req, res) => {
+     res.render('_form');
+});
+
+app.post('/insert', urlencodedParser, function (req, res) {
+
+     res.render('crud', {
+          data:req.body
+     });
+
+
+});
           
 
-          app.post('/_form', urlencodedParser, function (req, res) {
-
-               data.push('index.js',{data:req.params.name});
-               res.json(data);
-
-          });
+         
      }
