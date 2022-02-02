@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Forms</title>
+</head>
+
+<body>
+     <!-- include header -->
+     <%- include('include/_header') %>
+     <!-- /include header -->
+
+     <form id="open-form" action="/index.js" method="POST">
+         
+              <div class="form-group">
+                   <label for="formGroupExampleInput">Course-Name</label>
+                   <input type="text" class="form-control" name="python" id="formGroupExampleInput" placeholder="Course-Name">
+              </div>
+              <div class="form-group">
+                   <label for="formGroupExampleInput2">Course-Duration</label>
+                   <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Course-Duration">
+              </div>
+              <div class="form-group">
+                   <label for="formGroupExampleInput">Course-Fees</label>
+                   <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Course-Fees">
+              </div>
+              
+              <div>
+                   <a href="/"><button  type="submit" form="form1" name='add_course'id="adbtn"
+                             value="Submit">Add</button></a>
+                
+
+              </div>
+             
+
+         
+     </form>
+     <!-- <script>
+          function myFunction() {
+          var table = document.getElementById("table_ID");
+          var row = table.insertRow(0);
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(1);
+          var cell3 = row.insertCell(1);
+          cell1.innerHTML = "name";
+          cell2.innerHTML = "NEW CELL2";
+          cell3.innerHTML="new";
+          }
+     </script> -->
+    
+
+<!-- include footer -->
+<%- include('include/_footer') %>
+<!-- /include footer -->
+</body>
+
+</html>

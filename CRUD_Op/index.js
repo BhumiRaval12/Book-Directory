@@ -4,6 +4,7 @@ let morgan = require('morgan');
 let bodyparser = require("body-parser");
 let path = require('path');
 
+const webController = require('./server/controller/webcontollers');
 
 let app = express();
 
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 8080
 app.use(morgan('tiny'));
 
 
+webController(app);
 
 // parse request to body-parser
 app.use(bodyparser.urlencoded({
@@ -35,7 +37,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/form',(req,res)=>{
-     res.render('_form.ejs');
+     res.render('_form');
 });
 
 
