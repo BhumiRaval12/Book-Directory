@@ -7,9 +7,9 @@ var urlencodedParser = bodyParser.urlencoded({
 });
 module.exports = function (app) {
 
-app.get('/', (req, res) => {
-     res.render('crud');
-});
+// app.get('/', (req, res) => {
+//      res.render('crud');
+// });
 
 app.get('/form', (req, res) => {
      res.render('_form');

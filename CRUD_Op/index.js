@@ -15,7 +15,7 @@ const webController = require('./server/controller/webcontollers');
 const Courses = require('./models/course');
 
 let app = express();
-
+let router=express();
 
 
 dotenv.config({
@@ -58,30 +58,36 @@ app.use('/js', express.static(path.resolve(__dirname, "assets/js")))
 // });
 
 const Routes = require("./server/routes/routes");;
-app.use("/api", apiRoutes);
+app.use("/api", Routes);
 
-
-app.post('/insert', urlencodedParser, function (req, res) {
-
-     var crd = req.body;
-     sequelize.sync().then(result => {
-          console.log(result);
-          return crs.create({
-              Course_name: crd.name,
-               Course_Duration: crd.duration,
-               Course_Fees: crd.Fees,
-          }).then((courses) => {
-               console.log("courses added succesfully:", courses);
-          });
-     
-     
+sequelize.sync().then(() => {
+     app.listen(PORT, () => {
+          console.log(`listening on: http://localhost:${PORT}`);
      });
+});
+
+
+// app.post('/insert', urlencodedParser, function (req, res) {
+
+//      var crd = req.body;
+//      sequelize.sync().then(result => {
+//           console.log(result);
+//           return crs.create({
+//               Course_name: crd.name,
+//                Course_Duration: crd.duration,
+//                Course_Fees: crd.Fees,
+//           }).then((courses) => {
+//                console.log("courses added succesfully:", courses);
+//           });
+     
+     
+//      });
 
 
   
-});
+// });
 
 
-app.listen(PORT, () => {
-     console.log(`Server is running on http://localhost:${PORT}`)
-});
+// app.listen(PORT, () => {
+//      console.log(`Server is running on http://localhost:${PORT}`)
+// });

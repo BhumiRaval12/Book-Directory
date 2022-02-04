@@ -1,6 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const db = require("./models/course");
+const db = require("../../models/course");
+
+
+router.get('/', (req, res) => {
+     res.render('crud');
+});
 
 // get all 
 router.get("/all", (req, res) => {
