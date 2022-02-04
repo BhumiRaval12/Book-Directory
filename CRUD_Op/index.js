@@ -1,18 +1,30 @@
 let express = require('express');
 let dotenv = require('dotenv');
-let morgan = require('morgan');
 let bodyparser = require("body-parser");
 let path = require('path');
+const sequelize = require('./server/database/database');
+const crs = require("./models/course");
+
+
+
+
+
+
 
 const webController = require('./server/controller/webcontollers');
+const Courses = require('./models/course');
 
 let app = express();
 
-dotenv.config({path: 'config.env'})
+
+
+dotenv.config({
+     path: 'config.env'
+})
 const PORT = process.env.PORT || 8080
 
-// log requests
-app.use(morgan('tiny'));
+
+
 
 
 webController(app);
@@ -32,8 +44,41 @@ app.use('/img', express.static(path.resolve(__dirname, "assets/img")))
 app.use('/js', express.static(path.resolve(__dirname, "assets/js")))
 
 
+// sequelize.sync().then(result => {
+//      return crs.create({
+//           Course_name: "Machine-Learning",
+//           Course_Fees: 20000
+//      });
+//      console.log(result);
+
+// }).then(courses => {
+//      console.log("First Course added:", courses);
+// }).catch(err => {
+//      console.log(err);
+// });
 
 
+app.post('/insert', urlencodedParser, function (req, res) {
+
+     var crd = req.body;
+     sequelize.sync().then(result => {
+          console.log(result);
+          return crs.create({
+              Course_name: crd.name,
+               Course_Duration: crd.duration,
+               Course_Fees: crd.Fees,
+          }).then((courses) => {
+               console.log("courses added succesfully:", courses);
+          });
+     
+     
+     });
 
 
-app.listen(PORT, () => {console.log(`Server is running on http://localhost:${PORT}`)});
+  
+});
+
+
+app.listen(PORT, () => {
+     console.log(`Server is running on http://localhost:${PORT}`)
+});

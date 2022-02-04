@@ -1,0 +1,26 @@
+// const express = require("express");
+// const router = express.Router();
+// const db = require("../models");
+
+// // get all todos
+// router.get("/all", (req, res) => {
+//   db.Todo.findAll().then(todos => res.send(todos));
+// });
+
+// // get single todo by id
+// router.get("/find/:id", (req, res) => {
+//   db.Todo.findAll({
+//     where: {
+//       id: req.params.id
+//     }
+//   }).then(todo => res.send(todo));
+// });
+
+// // post new todo
+// router.post("/form", (req, res) => {
+//   db.Todo.create({
+//     text: req.body.text
+//   }).then(submitedTodo => res.send(submitedTodo));
+// });
+
+// module.exports = router;

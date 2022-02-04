@@ -176,3 +176,20 @@ form {
 
 
 
+#task {
+    padding: 2% 5%;
+    border-color: navy;
+}
+#submit {
+    padding: 2% 5%;
+    border-color: navy;
+    background-color: navy;
+    color: white;
+}
+.ongoing {
+    color: navy;
+}
+.completed {
+    text-decoration: line-through;
+    color: gray;
+}
