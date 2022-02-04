@@ -4,7 +4,7 @@ let bodyparser = require("body-parser");
 let path = require('path');
 const sequelize = require('./server/database/database');
 const crs = require("./models/course");
-
+const db = {};
 
 
 
@@ -56,6 +56,9 @@ app.use('/js', express.static(path.resolve(__dirname, "assets/js")))
 // }).catch(err => {
 //      console.log(err);
 // });
+
+const Routes = require("./server/routes/routes");;
+app.use("/api", apiRoutes);
 
 
 app.post('/insert', urlencodedParser, function (req, res) {
