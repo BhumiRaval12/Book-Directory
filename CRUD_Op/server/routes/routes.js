@@ -82,26 +82,27 @@ router.post("/new", (req, res) => {
 });
 
 // delete 
-router.delete("/delete:id", (req, res) => {
+router.delete("/delete/:id", (req, res) => {
      db.Courses.destroy({
           where: {
-               id: req.params.id
+               id: req.params.id,
+               res: redirect('/')
 
           }
      }).then(delcr => res.send(delcr));
 });
 
 
-// edit 
-router.put("/edit", (req, res) => {
-     db.Courses.update({
-          text: req.body.text
-     }, {
-          where: {
-               id: req.body.id
-          }
-     }).then(() => res.send("success"));
-});
+// // edit 
+// router.put("/edit", (req, res) => {
+//      db.Courses.update({
+//           text: req.body.text
+//      }, {
+//           where: {
+//                id: req.body.id
+//           }
+//      }).then(() => res.send("success"));
+// });
 
 
 // router.delete = (req, res) => {

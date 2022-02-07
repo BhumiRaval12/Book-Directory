@@ -74,10 +74,12 @@
                         <td><%= value.Course_Fees%></td>
 
                         <td>
-                            <a href='/edit/' class="btn border-shadow update">
+                            <a href='' class="btn border-shadow update">
                                 <span class='text-gradient'><i class='fas fa-pencil-alt'><%=courses.id%>
                                     </i></span></a>
-                            <a href='/delete' class="btn border-shadow delete">
+
+
+                            <a href='/delete/<%=value.id%>' class="btn border-shadow delete">
                                 <span class='text-gradient' id='del-btn'><i class='fas fa-trash'></i></span></a>
 
                         </td>
