@@ -1,27 +1,27 @@
-const Sequelize= require('sequelize');
-const sequelize=require("../server/database/database");
+const Sequelize = require('sequelize');
+const sequelize = require("../server/database/database");
 
 
 
-const Courses = sequelize.define("courses",{
-     id:{
-          type:Sequelize.INTEGER,
-          autoIncrement:true,
-          allowNull:false,
-          primaryKey:true,
+const Courses = sequelize.define("courses", {
+     id: {
+          type: Sequelize.INTEGER,
+          autoIncrement: true,
+          allowNull: false,
+          primaryKey: true,
      },
-      Course_name: {
-           type: Sequelize.STRING,
-           allowNull: false,
-      },
-      Course_Duration:{
-           type:Sequelize.INTEGER,
-           allowNull:false,
-      },
-      Course_Fees:{
-           type:Sequelize.INTEGER,
-           allowNull: false,
-      }
+     Course_name: {
+          type: Sequelize.STRING,
+          allowNull: false,
+     },
+     Course_Duration: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+     },
+     Course_Fees: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+     }
 
 });
 

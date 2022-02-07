@@ -16,6 +16,12 @@ module.exports = function (app) {
           res.render('_form');
      });
 
+     app.get("/", function (req, res) {
+          res.render("editform");
+     })
+
+
+
 
 
 

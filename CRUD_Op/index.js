@@ -48,7 +48,14 @@ app.use('/js', express.static(path.resolve(__dirname, "assets/js")))
 //      console.log(err);
 // });
 
-const Routes = require("./server/routes/routes");;
+
+
+// const editf = require("./views/edit_form.ejs");
+// app.use("/", editf);
+
+
+
+const Routes = require("./server/routes/routes");
 app.use("/", Routes);
 
 sequelize.sync().then(() => {

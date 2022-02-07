@@ -81,50 +81,59 @@ router.post("/new", (req, res) => {
      }).then(submitedcr => res.send(submitedcr));
 });
 
-// delete 
-router.delete("/delete/:id", (req, res) => {
-     db.Courses.destroy({
-          where: {
-               id: req.params.id,
-               res: redirect('/')
-
-          }
-     }).then(delcr => res.send(delcr));
-});
-
-
-// // edit 
-// router.put("/edit", (req, res) => {
-//      db.Courses.update({
-//           text: req.body.text
-//      }, {
+// // delete 
+// router.delete("/delete/:id", (req, res) => {
+//      db.Courses.destroy({
 //           where: {
-//                id: req.body.id
+//                id: req.params.id,
+//                res: redirect('/')
+
 //           }
-//      }).then(() => res.send("success"));
+//      }).then(delcr => res.send(delcr));
 // });
 
+router.get("/delete/:id", (req, res) => {
+     db.destroy({
+          where: {
+               id: req.params.id
+          }
+     }).then(delcr => res.send(delcr)).catch((err) => {
+          console.log(err)
+     });
+});
 
-// router.delete = (req, res) => {
-//      const id = req.params.id;
+// edit 
+router.get("/edit/:id", (req, res) => {
+     db.findAll({
+          where: {
+               id: req.params.id
+          }
+     }).then((course) => {
+          res.render('editform', {
+               Courses: course
+          }).catch((err) => {
+               console.log(err)
+          });
+     })
 
-//      db.Courses.destroy({
-//                where: {
-//                     id: del - btn
-//                }
-//           })
-//           .then(num => {
-//                if (num == 1) {
-//                     res.send({
-//                          message: "deleted successfully!"
-//                     });
-//                }
-//           })
+     router.post("/edit", urlencodedParser, (req, res) => {
+          db.update({
+               Course_name: req.body.C_Name,
+               Course_Duration: req.body.C_dur,
+               Course_Fees: req.body.C_Fees
 
-// };
+          }, {
+               where: {
+                    id: req.body.id
+               }
+          }).then((course) => {
+               console.log('course update successfully');
+               res.redirect('/');
+          })
+     });
 
 
-
+});
 
 
 
