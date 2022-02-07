@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -13,6 +13,9 @@
         src=“https://code.jquery.com/jquery-1.12.4.min.js”
         integrity=“sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=” crossorigin=“anonymous”></script>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+        crossorigin="anonymous" />
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -47,7 +50,7 @@
 
 
             <!-- form handling -->
-            <% if(typeof data != "undefined") {%>
+            <% if(typeof courses != "undefined") {%>
             <table class="table" id="table_ID">
                 <thead class="thead-dark" method='POST'>
                     <tr>
@@ -59,21 +62,33 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <% 
+                    
+                    
+                    courses.forEach((value)=>{
+                        %>
                     <tr>
-                        <td>1</td>
-                        <td><%= data.name%></td>
-                        <td><%= data.duration%></td>
-                        <td><%= data.fees%></td>
+                        <td><%= value.id%></td>
+                        <td><%= value.Course_name%></td>
+                        <td><%= value.Course_Duration%></td>
+                        <td><%= value.Course_Fees%></td>
 
                         <td>
-                            <a href='#' class="btn border-shadow update">
-                                <span class='text-gradient'><i class='fas fa-pencil-alt'></i></span></a>
-                            <a href='#' class="btn border-shadow delete">
-                                <span class='text-gradient'><i class='fas fa-trash'></i></span></a>
+                            <a href='/edit/' class="btn border-shadow update">
+                                <span class='text-gradient'><i class='fas fa-pencil-alt'><%=courses.id%>
+                                    </i></span></a>
+                            <a href='/delete' class="btn border-shadow delete">
+                                <span class='text-gradient' id='del-btn'><i class='fas fa-trash'></i></span></a>
+
                         </td>
 
 
                     </tr>
+                    <%
+                    })
+                    %>
+
+
                 </tbody>
             </table>
             <%
@@ -82,8 +97,8 @@
           {  
             %>
             <div class="card">
-                <div class="card-header text-center text-warning">
-                    <h4>Heyy Dude There is Nothing ...Please Add First</h1>
+                <div class="card-header text-center text-info">
+                    <h4>There is Nothing ...Please Add First</h1>
 
                 </div>
                 <% }
@@ -92,7 +107,7 @@
     </main>
     <!-- /Main Site -->
 
-  
+
 
 
     <!-- include footer -->
