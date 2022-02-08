@@ -156,21 +156,22 @@ form {
   
 }
 #adbtn {
-  background-color: #4CAF50; /* Green */
+  background-color: #116b14; /* Green */
   border: none;
   color: white;
-  padding: 16px 32px;
+  padding: 10px 16px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  margin: 6px 2px;
   transition-duration: 0.4s;
   cursor: pointer;
+  align-items:center;
 
 }
 #adbtn:hover {
-  background-color: #1511e2;
+  background-color:red;
   color: white;
 }
 
@@ -193,3 +194,4 @@ form {
     text-decoration: line-through;
     color: gray;
 }
+

@@ -54,6 +54,7 @@ router.post('/insert', urlencodedParser, function (req, res) {
 
 
 
+
 });
 
 router.get('/form', (req, res) => {
@@ -81,23 +82,17 @@ router.post("/new", (req, res) => {
      }).then(submitedcr => res.send(submitedcr));
 });
 
-// // delete 
-// router.delete("/delete/:id", (req, res) => {
-//      db.Courses.destroy({
-//           where: {
-//                id: req.params.id,
-//                res: redirect('/')
 
-//           }
-//      }).then(delcr => res.send(delcr));
-// });
 
 router.get("/delete/:id", (req, res) => {
      db.destroy({
           where: {
                id: req.params.id
           }
-     }).then(delcr => res.send(delcr)).catch((err) => {
+
+     }).then(course => {
+          res.redirect('/');
+     }).catch((err) => {
           console.log(err)
      });
 });
@@ -128,7 +123,9 @@ router.get("/edit/:id", (req, res) => {
                }
           }).then((course) => {
                console.log('course update successfully');
+
                res.redirect('/');
+
           })
      });
 
