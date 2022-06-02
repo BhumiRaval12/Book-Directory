@@ -19,7 +19,7 @@ module.exports = {
       res.send(addBook);
 
       console.log(book_Directory);
-    } catch (e) {
+    } catch (error) {
       return res.status(200).json({
         status: 200,
         data: "",
@@ -66,7 +66,7 @@ module.exports = {
       });
 
       res.send(findBook);
-    } catch (e) {
+    } catch (error) {
       return res.status(500).json({
         status: 500,
         data: "",
@@ -81,7 +81,7 @@ module.exports = {
     try {
       let showBook = await bookData.findOne({ where: { id: req.params.id } });
       res.send(showBook);
-    } catch (e) {
+    } catch (error) {
       return res.status(200).json({
         status: 200,
         data: "",
@@ -108,7 +108,7 @@ module.exports = {
       });
 
       res.send(updatebooks);
-    } catch (e) {
+    } catch (error) {
       return res.status(500).json({
         status: 500,
         data: "",
