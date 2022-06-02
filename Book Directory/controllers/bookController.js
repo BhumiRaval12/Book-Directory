@@ -6,34 +6,46 @@ const Op = Sequelize.Op;
 
 module.exports = {
   // add a new book
-  addBook: (req, res) => {
-    const book_Directory = {
-      name: req.body.name,
-      author: req.body.author,
-    };
-    console.log(book_Directory);
+  addBook: async (req, res) => {
+    try {
+      const book_Directory = {
+        name: req.body.name,
+        author: req.body.author,
+      };
+      console.log(book_Directory);
 
-    bookData
-      .create(book_Directory)
-      .then((data) => {
-        res.send(data);
-      })
-      .catch((err) => {
-        res.status(500).send({
-          message: err.message || "Some error occurred while creating .",
-        });
+      let addBook = await bookData.create(book_Directory);
+
+      res.send(addBook);
+
+      console.log(book_Directory);
+    } catch (e) {
+      return res.status(200).json({
+        status: 200,
+        data: "",
+        error: "Missing Required fields",
       });
-    console.log(book_Directory);
+      //console.log(e.message);
+    }
   },
 
   //retrieve all books by search
-  getAll: (req, res) => {
-    let name = req.query.name;
-    let author = req.query.author;
-    let page = parseInt(req.query.page);
-    let limit = parseInt(req.query.limit);
-    bookData
-      .findAndCountAll({
+  getAll: async (req, res) => {
+    try {
+      let name = req.query.name;
+      let author = req.query.author;
+      let page = parseInt(req.query.page);
+      let limit = parseInt(req.query.limit);
+
+      if (!name & !author) {
+        return res.status(200).json({
+          status: 200,
+          data: "",
+          error: "Missing Required fields",
+        });
+      }
+
+      let findBook = await bookData.findAndCountAll({
         limit: limit,
         offset: 0,
         page: page,
@@ -51,39 +63,58 @@ module.exports = {
             },
           ],
         },
-      })
-      .then((data) => {
-        res.send(data);
       });
+
+      res.send(findBook);
+    } catch (e) {
+      return res.status(500).json({
+        status: 500,
+        data: "",
+        error: "Unknown error",
+      });
+      //console.log(e.message);
+    }
   },
 
   //get book by Id
-  getById: (req, res) => {
-    bookData
-      .findOne({ where: { id: req.params.id } })
-      .then((data) => {
-        res.send(data);
-      })
-      .catch((err) => {
-        res.status(500).send({
-          message: err.message || "Some error occurred while fetching .",
-        });
+  getById: async (req, res) => {
+    try {
+      let showBook = await bookData.findOne({ where: { id: req.params.id } });
+      res.send(showBook);
+    } catch (e) {
+      return res.status(200).json({
+        status: 200,
+        data: "",
+        error: "Missing Required fields",
       });
+      //console.log(e.message);
+    }
   },
 
   //update book by Id
-  updateById: (req, res) => {
-    var UpdatedData = req.body;
-
-    bookData
-      .update(UpdatedData, { where: { id: req.params.id } })
-      .then((data) => {
-        res.send(data);
-      })
-      .catch((err) => {
-        res.status(500).send({
-          message: err.message || "some error occured while updating",
+  updateById: async (req, res) => {
+    try {
+      let UpdatedData = req.body;
+      if (!UpdatedData.name || !UpdatedData.author) {
+        return res.status(200).json({
+          status: 200,
+          data: "",
+          error: "Missing Required fields",
         });
+      }
+
+      let updatebooks = await bookData.update(UpdatedData, {
+        where: { id: req.params.id },
       });
+
+      res.send(updatebooks);
+    } catch (e) {
+      return res.status(500).json({
+        status: 500,
+        data: "",
+        error: "Unknown error",
+      });
+      //console.log(e.message);
+    }
   },
 };
