@@ -27,22 +27,16 @@ module.exports = {
   },
 
   //retrieve all books by search
-  getAll: async (req, res) => {
-    let page = parseInt(req.query.page) || "";
-    let limit = parseInt(req.query.limit) || "";
+  getAll: (req, res) => {
     let name = req.query.name;
     let author = req.query.author;
-
-    const startIndex = (page - 1) * limit;
-    const endIndex = page * limit;
-    console.log(startIndex);
-    console.log(endIndex);
-
+    let page = parseInt(req.query.page);
+    let limit = parseInt(req.query.limit);
     bookData
-      .findAll({
-        raw: true,
-        // where: { name: { [Op.like]: "%" + name + "%" } }
-
+      .findAndCountAll({
+        limit: limit,
+        offset: 0,
+        page: page,
         where: {
           [Op.or]: [
             {
@@ -59,14 +53,7 @@ module.exports = {
         },
       })
       .then((data) => {
-        const finalIndex = data.slice(startIndex, endIndex);
-        console.log(finalIndex);
-        res.send(finalIndex);
-      })
-      .catch((err) => {
-        res.status(500).send({
-          message: err.message || "Some error occurred while creating .",
-        });
+        res.send(data);
       });
   },
 
@@ -89,11 +76,7 @@ module.exports = {
     var UpdatedData = req.body;
 
     bookData
-      .update(
-        { name: UpdatedData.name, author: UpdatedData.author },
-        { where: { id: req.params.id },raw:true}
-      )
-
+      .update(UpdatedData, { where: { id: req.params.id } })
       .then((data) => {
         res.send(data);
       })
